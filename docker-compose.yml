@@ -1,0 +1,18 @@
+version: '3.6'
+services:
+  iris:
+    image: intersystemsdc/iris-community
+#    image: intersystemsdc/irishealth-community
+    restart: no
+    hostname: mini-docker
+    container_name: iris-mini-docker
+    command: /iris-main
+      - -a /home/irisowner/dev/ascript.sh
+      - -b /home/irisowner/dev/bscript.sh
+      - --ISCAgent false
+
+    ports: 
+      - 41773:1972
+      - 42773:52773
+    volumes:
+      - ./:/home/irisowner/dev
