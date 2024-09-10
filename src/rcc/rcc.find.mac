@@ -1,0 +1,125 @@
+ROUTINE rcc.find
+go  ; find string in code
+  set nsl="%SYS"
+  if $D(^|"%SYS"|CONFIG("Namespaces",nsl)) 
+  for {
+    set ns=$O(@$ZR) quit:ns="" 
+    set nsl=nsl_","_ns
+  }
+  write "----------------",!
+  write !,"enter search string [$ZU] <blank> to exit: " read find,!
+  quit:find=" " 
+  if find="" set find="$ZU"
+  read ?10,"Verbose? (0,1) [0]: ",verbose,!
+  read ?10,"Force UpperCase? (1,0) [1]: ",noupper,!
+  set tls="CLS,MAC,INT,INC,ALL"
+tpsel
+  write !,"enter code type ("_tls_") [ALL]: " read typ,!
+  if typ="" set typ="ALL"
+  set typ=$ZCVT(typ,"U")
+  if (tls_",")'[(typ_",") write ?5,"oops!",! goto tpsel
+nssel
+  write !,"select namespace ("_nsl_") [USER]: " read nsp,!
+  if nsp="" set nsp="USER"
+  set nsp=$ZCVT(nsp,"U")
+  if (nsl_",")'[(nsp_",") write ?5,"oops!",! goto nssel
+  set %nsp=$ZU(5)
+  ZN nsp
+  set start=$S(nsp="%SYS":" ",1:"@")
+  write !,"** Scan Namespace: ",nsp," **",!!
+  do @typ
+  ZN %nsp
+  goto go
+ 
+CLS write "** CLS **",!
+  set name=start  
+  set item("a")="Prop : "
+  set item("i")="Index: "
+  set item("m")="Meth : "
+  set item("p")="Param: "
+  set tot=0
+  for  {
+    set hit=0
+    set name=$o(^oddDEF(name))
+    quit:name=""
+    for tp="a","i","m","p" {
+      set node=$q(^oddDEF(name,tp,""),1,txt)
+      for {
+	    if node="" quit  
+        if $QS(node,2)'=tp quit
+        set txf=$S(noupper:txt,1:$ZCVT(txt,"U")) 
+        if txf[find,$i(hit),verbose
+        if  write:hit=1 !,"** "_name_" **",!
+        if  write item(tp),$qs($ZR,3)," : ",txt,!
+        set node=$q(@$ZR,1,txt)
+        }
+      }
+     if hit,$i(tot,hit) write "** ",hit,?10,name,!        
+  }
+  write "** ",tot," CLS **",!   
+  quit
+  
+MAC write "** MAC **",!
+  set name=start
+  set tot=0
+  for  { 
+    set hit=0
+    set name=$o(^rMAC(name))
+    quit:name=""
+    set cnt=$G(^rMAC(name,0,0),0)
+    for linnum=1:1:cnt {
+      set txt=$g(^rMAC(name,0,linnum))
+      set txf=$S(noupper:txt,1:$ZCVT(txt,"U")) 
+      if txf[find,$i(hit),verbose
+      if  write:hit=1 !,"** "_name_" **",! write txt,!  
+      }
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+  }
+  write "** ",tot," MAC **",!      
+  quit
+
+INT write !,"** INT **",!
+  set name=start
+  set tot=0
+  for  {
+    set hit=0
+    set name=$o(^ROUTINE(name)) 
+    quit:name=""
+    set cnt=$G(^ROUTINE(name,0,0),0)
+    for linnum=1:1:cnt {
+      set txt=$g(^ROUTINE(name,0,linnum))
+      set txf=$S(noupper:txt,1:$ZCVT(txt,"U"))  
+      if txf[find,$i(hit),verbose 
+      if  write:hit=1 !,"** "_name_" **",! write txt,! 
+      }
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+  }
+  write "** ",tot," INT **",!  
+  quit
+    
+INC write !,"** INC **",!
+  set name=start
+  set tot=0
+  for  {
+    set hit=0
+    set name=$o(^rINC(name))
+    quit:name=""
+    set cnt=$g(^rINC(name,0,0),0)
+    for linnum=1:1:cnt {
+      set txt=$g(^rINC(name,0,linnum))
+      set txf=$S(noupper:txt,1:$ZCVT(txt,"U"))  
+      if txf[find,$i(hit),verbose
+      if  write:hit=1 !,"** "_name_" **",! write txt,1
+      }
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+    }
+  write "** ",tot," INC **",!  
+  quit
+ALL
+  set all=0
+  do CLS if $i(all,tot)
+  do MAC if $i(all,tot)
+  do INT if $i(all,tot)
+  do INC if $i(all,tot)
+  write !,"** ",all," ** ALL total ",!
+  quit
