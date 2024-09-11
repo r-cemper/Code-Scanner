@@ -1,10 +1,10 @@
 ROUTINE rcc.find
 go  ; find string in code
-  set nsl="%SYS"
-  if $D(^|"%SYS"|CONFIG("Namespaces",nsl)) 
+  set nsl=$lfs("ALL,%SYS")
+  if $D(^|"%SYS"|CONFIG("Namespaces","%SYS")) 
   for {
     set ns=$O(@$ZR) quit:ns="" 
-    set nsl=nsl_","_ns
+    set nsl=nsl_$LB(ns)
   }
   write "----------------",!
   write !,"enter search string [$ZU] <blank> to exit: " read find,!
@@ -12,24 +12,29 @@ go  ; find string in code
   if find="" set find="$ZU"
   read ?10,"Verbose? (0,1) [0]: ",verbose,!
   read ?10,"Force UpperCase? (1,0) [1]: ",noupper,!
-  set tls="CLS,MAC,INT,INC,ALL"
+  set tls=$lfs("CLS,MAC,INT,INC,ALL")
 tpsel
-  write !,"enter code type ("_tls_") [ALL]: " read typ,!
+  write !,"enter code type ("_$lts(tls)_") [ALL]: " read typ,!
   if typ="" set typ="ALL"
   set typ=$ZCVT(typ,"U")
-  if (tls_",")'[(typ_",") write ?5,"oops!",! goto tpsel
+  if '$LF(tls,typ) write ?5,"oops!",! goto tpsel
 nssel
-  write !,"select namespace ("_nsl_") [USER]: " read nsp,!
+  write !,"select namespace ("_$LTS(nsl)_") [USER]: " read nsp,!
   if nsp="" set nsp="USER"
   set nsp=$ZCVT(nsp,"U")
-  if (nsl_",")'[(nsp_",") write ?5,"oops!",! goto nssel
+  if '$LF(nsl,nsp) write ?5,"oops!",! goto nssel
   set %nsp=$ZU(5)
+  if '(nsp="ALL") do loop goto go
+  for ns=2:1:$LL(nsl) set nsp=$li(nsl,ns) do loop 
+  goto go 
+
+loop  
   ZN nsp
   set start=$S(nsp="%SYS":" ",1:"@")
   write !,"** Scan Namespace: ",nsp," **",!!
   do @typ
   ZN %nsp
-  goto go
+  quit
  
 CLS write "** CLS **",!
   set name=start  
@@ -109,7 +114,7 @@ INC write !,"** INC **",!
       set txt=$g(^rINC(name,0,linnum))
       set txf=$S(noupper:txt,1:$ZCVT(txt,"U"))  
       if txf[find,$i(hit),verbose
-      if  write:hit=1 !,"** "_name_" **",! write txt,1
+      if  write:hit=1 !,"** "_name_" **",! write txt,!
       }
     if hit,$i(tot,hit) write "** ",hit,?10,name,!  
     }
