@@ -40,6 +40,9 @@ USER>do ^rcc.find
 - **Namespace** defines where the scan is executed    
   %-routines and %-classes are always excluded for
   namespaces other than %SYS
+  *UPDATE*  triggered by a recent request
+  running across ALL Namspaces was added.
+ 
 
 ### Practical hint
 - run a scan over ALL non-verbose to find affected code types
