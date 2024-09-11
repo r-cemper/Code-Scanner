@@ -52,4 +52,4 @@ USER>do ^rcc.find
 - most likely there is no need for any fix in INT 
 
 [Article in DC](https://community.intersystems.com/post/code-scanner)   
-[Video](https://youtu.be/nRm7ydTH0EA)    
+[Video](https://youtu.be/SJ8duR8yGz8)    
