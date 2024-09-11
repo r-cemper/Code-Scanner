@@ -48,5 +48,5 @@ USER>do ^rcc.find
 - then run over MAC and apply the required changes
 - most likely there is no need for any fix in INT 
 
-[Article in DC](https://community.intersystems.com/post)   
+[Article in DC](https://community.intersystems.com/post/code-scanner)   
 [Video]()    
