@@ -53,3 +53,6 @@ USER>do ^rcc.find
 
 [Article in DC](https://community.intersystems.com/post/code-scanner)   
 [Video](https://youtu.be/JpRJzDNp96c)    
+
+[Demo Server SMP](https://code-scanner.demo.community.intersystems.com/csp/sys/UtilHome.csp)   
+[Demo Server WebTerminal](https://code-scanner.demo.community.intersystems.com/terminal/)    
