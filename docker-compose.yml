@@ -1,7 +1,10 @@
-version: '3.6'
 services:
   iris:
-    image: intersystemsdc/iris-community
+    build: 
+# just for Online Demo    
+      context: .
+      dockerfile: Dockerfile
+#    image: intersystemsdc/iris-community
     restart: always
     command: -a /home/irisowner/dev/ascript.sh
 
