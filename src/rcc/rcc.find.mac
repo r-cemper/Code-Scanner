@@ -34,7 +34,7 @@ loop
   ZN nsp
   set start=$S(nsp="%SYS":" ",1:"@")
   write !,"** Scan Namespace: ",nsp," **",!!
-  if $i(totALL,tot)
+  if $i(totALL,$g(tot))
   do @typ
   ZN %nsp
   quit
