@@ -3,7 +3,7 @@
   <Document name="rcc-find.ZPM">
     <Module>
       <Name>rcc-find</Name>
-      <Version>0.0.2</Version>
+      <Version>0.0.3</Version>
       <Description>Find String in CLS,MAC,INT,INC</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
