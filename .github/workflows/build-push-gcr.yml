@@ -1,4 +1,4 @@
-scannername: Cloud Run Deploy
+name: Cloud Run Deploy
 
 on:
   push:
