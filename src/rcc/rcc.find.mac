@@ -24,22 +24,23 @@ nssel
   set nsp=$ZCVT(nsp,"U")
   if '$LF(nsl,nsp) write ?5,"oops!",! goto nssel
   set %nsp=$ZU(5)
-  set totALL=0
+  set (all,totALL)=0
+  kill sub
   if '(nsp="ALL") do loop goto go
   for ns=2:1:$LL(nsl) set nsp=$li(nsl,ns) do loop
-  write !,"** ",totALL," ** total in ALL Namespaces",!       
+  write !,"** ",totALL," ** total in ALL Namespaces",!
+  zwrite sub        
   goto go 
 
 loop  
   ZN nsp
   set start=$S(nsp="%SYS":" ",1:"@")
-  write !,"** Scan Namespace: ",nsp," **",!!
-  if $i(totALL,$g(tot))
+  write !,"** Scan Namespace: ",nsp," **",!
   do @typ
   ZN %nsp
   quit
  
-CLS write "** CLS **",!
+CLS write !,"** CLS **",!
   set name=start  
   set item("a")="Prop : "
   set item("i")="Index: "
@@ -53,7 +54,7 @@ CLS write "** CLS **",!
     for tp="a","i","m","p" {
       set node=$q(^oddDEF(name,tp,""),1,txt)
       for {
-	    if node="" quit  
+      if node="" quit  
         if $QS(node,2)'=tp quit
         set txf=$S(noupper:txt,1:$ZCVT(txt,"U")) 
         if txf[find,$i(hit),verbose
@@ -62,12 +63,14 @@ CLS write "** CLS **",!
         set node=$q(@$ZR,1,txt)
         }
       }
-     if hit,$i(tot,hit) write "** ",hit,?10,name,!        
+     if hit,$i(tot,hit) write "** ",hit,?10,name,!
+     if $t,$i(totALL,hit),$i(all,hit)        
   }
-  write "** ",tot," CLS **",!   
+  write !,"** ",tot," CLS in Namespace "_nsp_"**",!
+  set sub(nsp,"CLS")=tot   
   quit
   
-MAC write "** MAC **",!
+MAC write !,"** MAC **",!
   set name=start
   set tot=0
   for  { 
@@ -81,9 +84,11 @@ MAC write "** MAC **",!
       if txf[find,$i(hit),verbose
       if  write:hit=1 !,"** "_name_" **",! write txt,!  
       }
-    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!
+    if $t,$i(totALL,hit),$i(all,hit) 
   }
-  write "** ",tot," MAC **",!      
+  write !,"** ",tot," MAC in Namespace "_nsp_"**",!
+  set sub(nsp,"MAC")=tot     
   quit
 
 INT write !,"** INT **",!
@@ -100,9 +105,11 @@ INT write !,"** INT **",!
       if txf[find,$i(hit),verbose 
       if  write:hit=1 !,"** "_name_" **",! write txt,! 
       }
-    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!
+    if $t,$i(totALL,hit),$i(all,hit)  
   }
-  write "** ",tot," INT **",!  
+  write !,"** ",tot," INT in Namespace "_nsp_"**",!
+  set sub(nsp,"INT")=tot
   quit
     
 INC write !,"** INC **",!
@@ -119,15 +126,14 @@ INC write !,"** INC **",!
       if txf[find,$i(hit),verbose
       if  write:hit=1 !,"** "_name_" **",! write txt,!
       }
-    if hit,$i(tot,hit) write "** ",hit,?10,name,!  
+    if hit,$i(tot,hit) write "** ",hit,?10,name,!
+    if $t,$i(totALL,hit),$i(all,hit) 
     }
-  write "** ",tot," INC **",!!  
+  write !,"** ",tot," INC in Namespace "_nsp_"**",!
+  set sub(nsp,"INC")=tot  
   quit
 ALL
-  set all=0
-  do CLS if $i(all,tot)
-  do MAC if $i(all,tot)
-  do INT if $i(all,tot)
-  do INC if $i(all,tot)
-  write !,"** ",all," ** ALL total in"_nsp,!
+  set all=0 do CLS, MAC,INT,INC 
+  write !,"** ",all," ** ALL total in Namespace "_nsp,!
+  set sub(nsp)=all 
   quit
