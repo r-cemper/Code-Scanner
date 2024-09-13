@@ -51,7 +51,8 @@ USER>do ^rcc.find
 - then run over MAC and apply the required changes
 - most likely there is no need for any fix in INT 
 
-[Article in DC](https://community.intersystems.com/post/code-scanner)   
+[Article 1 in DC](https://community.intersystems.com/post/code-scanner)   
+[Article 2 in DC](https://community.intersystems.com/post/code-scanner-enhanced) 
 [Video](https://youtu.be/JpRJzDNp96c)    
 
 [Demo Server SMP](https://code-scanner.demo.community.intersystems.com/csp/sys/UtilHome.csp)   
