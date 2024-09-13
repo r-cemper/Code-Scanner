@@ -1,5 +1,5 @@
 # Code-Scanner
-This routine is built to work in Caché/Ensemble/.. and IRIS without any chcanges  
+This routine is built to work in Caché/Ensemble/.. and IRIS without any changes  
 The original code was used to prepare the migration of an installation to IRIS   
 that was grown over decades.  
 This dual-sided compatibility was achieved by using pure ObjectScript without  
