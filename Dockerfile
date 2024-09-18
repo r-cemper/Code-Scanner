@@ -1,7 +1,6 @@
-# just for Online Demo and Quality check
-# ARG IMAGE=intersystemsdc/iris-community
-# FROM $IMAGE
-FROM intersystemsdc/iris-community
+# just for Online Demo
+ARG IMAGE=intersystemsdc/iris-community:latest
+FROM $IMAGE
 USER root
 WORKDIR /home/irisowner/dev  
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /home/irisowner/dev
