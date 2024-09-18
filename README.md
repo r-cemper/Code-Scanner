@@ -2,7 +2,7 @@
 This routine is built to work in Caché/Ensemble/.. and IRIS without any changes  
 The original code was used to prepare the migration of an installation to IRIS   
 that was grown over decades.  
-This dual-sided compatibility was achieved by using pure ObjectScript without  
+This dual-sided compatibility was achieved by using pure ObjectScript without   
 any special features. It scans CLS,MAC,INT,INC for any kind of text.
 ### Prerequisites
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
