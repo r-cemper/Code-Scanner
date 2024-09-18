@@ -1,7 +1,7 @@
 # just for Online Demo
 # add version for Quality check
-arg VERSION=latest
 ARG IMAGE=intersystemsdc/iris-community
+ARG VERSION=latest
 FROM $IMAGE:$VERSION
 USER root
 WORKDIR /home/irisowner/dev  
