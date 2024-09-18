@@ -8,10 +8,9 @@ zn "USER"
 // Create /_vscode web app to support intersystems-community.testingmanager VS Code extension
 zpm "install vscode-per-namespace-settings"
 zpm "install webterminal"
-zpm "load /home/irisowner/dev/ -v ":1
 
 // this should be the place for individual application code.
-zpm "load  
+zpm "load /home/irisowner/dev/ -v ":1
 // do EnableDeepSee^%SYS.cspServer("/csp/user/")
 zpm "list"
 halt
