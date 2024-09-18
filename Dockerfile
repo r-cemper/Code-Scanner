@@ -1,7 +1,7 @@
-# just for Online Demo
-# add version for Quality check
+# Dockerfile just for Online Demo
+# Explicit version for Quality check !!! What a nonsense !!!
 ARG IMAGE=intersystemsdc/iris-community
-ARG VERSION=latest
+ARG VERSION=2024.1
 FROM $IMAGE:$VERSION
 USER root
 WORKDIR /home/irisowner/dev  
