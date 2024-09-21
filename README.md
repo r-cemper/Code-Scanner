@@ -52,7 +52,8 @@ USER>do ^rcc.find
 - most likely there is no need for any fix in INT 
 
 [Article 1 in DC](https://community.intersystems.com/post/code-scanner)   
-[Article 2 in DC](https://community.intersystems.com/post/code-scanner-enhanced) 
+[Article 2 in DC](https://community.intersystems.com/post/code-scanner-enhanced)    
+[Article en français](https://fr.community.intersystems.com/post/comment-trouver-mon-texte-sp%C3%A9cifique-en-objectscript)   
 [Video](https://youtu.be/JpRJzDNp96c)    
 
 [Demo Server SMP](https://code-scanner.demo.community.intersystems.com/csp/sys/UtilHome.csp)   
