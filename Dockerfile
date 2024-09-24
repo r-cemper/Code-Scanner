@@ -1,6 +1,6 @@
 # Dockerfile just for Online Demo
 # Explicit version for Quality check !!! What a nonsense !!!
-FROM intersystemsdc/iris-community:2024.1
+FROM intersystemsdc/iris-community:latest
 USER root
 WORKDIR /home/irisowner/dev  
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /home/irisowner/dev
