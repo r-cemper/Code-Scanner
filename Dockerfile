@@ -1,10 +1,8 @@
 # Dockerfile just for Online Demo
-# Explicit version for Quality check !!! What a nonsense !!!
 ARG IMAGE=intersystemsdc/iris-community:2024.1
-ARG IMAGE=intersystemsdc/iris-community
-# ARG VERSION=2024.1   
-ARG VERSION=latest
-FROM $IMAGE:$VERSION
+# Explicit version for Quality check !!! What a nonsense !!!
+ARG IMAGE=intersystemsdc/iris-community:latest
+FROM $IMAGE
 USER root
 WORKDIR /home/irisowner/dev  
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /home/irisowner/dev
