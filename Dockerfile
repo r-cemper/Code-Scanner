@@ -1,5 +1,6 @@
 # Dockerfile just for Online Demo
 # Explicit version for Quality check !!! What a nonsense !!!
+ARG IMAGE=intersystemsdc/iris-community:2024.1
 ARG IMAGE=intersystemsdc/iris-community
 # ARG VERSION=2024.1   
 ARG VERSION=latest
