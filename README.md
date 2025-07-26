@@ -20,9 +20,9 @@ To open IRIS Terminal do:
 $ docker-compose exec iris iris session iris
 USER>
 ```
-or using **WebTerminal**
+or using **iTerm** in browser
 ```
-http://localhost:42773/terminal/
+http://localhost:42773/iterm/
 ```
 To access IRIS System Management Portal
 ```
